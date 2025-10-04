@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Étape 11 – Finalisation client | Boîte à Idées</title>
+<title>Étape 10 – Styles et accessibilité | Boîte à Idées</title>
 <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <body>
@@ -31,51 +31,58 @@
 
 <main>
 <section id="introduction">
-<h1>Étape 11 – Finalisation et optimisation côté client</h1>
+<h1>Étape 10 – Styles et accessibilité mobile-first</h1>
 <p>
-Nous finalisons l’application côté client : interface intuitive, validation, affichage en temps réel, et compatibilité mobile.
+Nous allons créer un CSS commun pour toutes les pages, responsive et accessible, en priorité mobile-first.
 </p>
 </section>
 
 <section id="theorie">
 <pre><code>
-// public/js/script.js
-// Gestion de la création, affichage et suppression côté client
-async function supprimerIdee(id){
-  await fetch("/api/idees/" + id, {
-    method: "DELETE",
-    headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-  });
-  chargerIdees();
-}
+/* public/css/styles.css */
+body { font-family: Arial, sans-serif; margin:0; padding:0; line-height:1.5; }
+.navbar { display:flex; justify-content:space-between; align-items:center; padding:1rem; background:#333; color:#fff; }
+.nav-links { display:flex; gap:1rem; list-style:none; }
+.nav-links a { color:#fff; text-decoration:none; }
+.nav-toggle { display:none; background:none; border:none; color:#fff; font-size:1.5rem; }
+.idee { border:1px solid #ccc; padding:1rem; margin:0.5rem 0; }
+img { max-width:100%; height:auto; }
 
-// Optimisation : éviter rechargement complet, améliorer accessibilité
-listeIdees.addEventListener("click", (e) => {
-  if(e.target.classList.contains("deleteBtn")){
-    supprimerIdee(e.target.dataset.id);
-  }
+@media(max-width:768px){
+  .nav-links { flex-direction:column; display:none; }
+  .nav-links.active { display:flex; }
+  .nav-toggle { display:block; }
+}
+</code></pre>
+</section>
+
+<section id="commandes">
+<pre><code>
+// public/js/script.js
+const navToggle = document.getElementById("nav-toggle");
+const navLinks = document.getElementById("nav-links");
+navToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
 });
 </code></pre>
 </section>
 
 <section id="recap">
 <ul>
-<li>Fonctionnalités complètes côté client</li>
-<li>Affichage temps réel et suppression</li>
-<li>Compatibilité mobile et accessibilité</li>
-<li>Projet prêt pour production minimale (MVP)</li>
+<li>CSS commun créé</li>
+<li>Responsive mobile-first</li>
+<li>Menu burger fonctionnel</li>
+<li>Accessibilité et lisibilité améliorées</li>
 </ul>
 </section>
 
 <section id="etape-suivante">
-<p>
-Toutes les étapes principales du projet sont complétées.
-</p>
+<p>Étape 11 : Finalisation et optimisation côté client.</p>
 </section>
 </main>
 
 <footer>
-<p>Projet Boîte à Idées – Étape 11</p>
+<p>Projet Boîte à Idées – Étape 10</p>
 </footer>
 <script src="public/js/script.js"></script>
 </body>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Récapitulatif – Boîte à Idées</title>
+  <link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+<header>
+  <nav class="navbar">
+    <div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Introduction</a></li>
+      <li><a href="etape1.html">Étape 1</a></li>
+      <li><a href="etape2.html">Étape 2</a></li>
+      <li><a href="etape3.html">Étape 3</a></li>
+      <li><a href="etape4.html">Étape 4</a></li>
+      <li><a href="etape5.html">Étape 5</a></li>
+      <li><a href="etape6.html">Étape 6</a></li>
+      <li><a href="etape7.html">Étape 7</a></li>
+      <li><a href="etape8.html">Étape 8</a></li>
+      <li><a href="etape9.html">Étape 9</a></li>
+      <li><a href="etape10.html">Étape 10</a></li>
+      <li><a href="etape11.html">Étape 11</a></li>
+      <li><a href="recap.html">Récapitulatif</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<section id="introduction">
+  <h1>Récapitulatif du projet – Boîte à Idées</h1>
+  <p>
+    Cette page résume toutes les étapes et éléments clés pour créer une application **Boîte à Idées** complète, du serveur à l’interface client.
+  </p>
+</section>
+
+<section id="contenu">
+  <h2>1. Architecture et technologies</h2>
+  <ul>
+    <li>Architecture **MVC** : Model, View (Twig), Controller</li>
+    <li>Express pour le serveur Node.js</li>
+    <li>MySQL pour la base de données</li>
+    <li>JWT pour l’authentification</li>
+    <li>Joi pour la validation des données</li>
+    <li>Multer pour les uploads d’images (max 2 Mo)</li>
+    <li>CSS et JavaScript communs pour toutes les pages, responsive mobile-first</li>
+  </ul>
+
+  <h2>2. Étapes principales</h2>
+  <ol>
+    <li><strong>Étape 1 :</strong> Initialisation du projet, arborescence et serveur minimal</li>
+    <li><strong>Étape 2 :</strong> Configuration MySQL, création des tables <code>users</code> et <code>idees</code></li>
+    <li><strong>Étape 3 :</strong> Middlewares et validation des données avec Joi</li>
+    <li><strong>Étape 4 :</strong> Routes et contrôleurs pour CRUD utilisateurs et idées</li>
+    <li><strong>Étape 5 :</strong> Authentification avancée et gestion des rôles</li>
+    <li><strong>Étape 6 :</strong> Upload d’images avec Multer et restrictions de taille/type</li>
+    <li><strong>Étape 7 :</strong> Intégration Twig pour affichage dynamique côté serveur</li>
+    <li><strong>Étape 8 :</strong> Formulaire client pour ajouter des idées</li>
+    <li><strong>Étape 9 :</strong> Affichage dynamique et mise à jour en temps réel côté client</li>
+    <li><strong>Étape 10 :</strong> Styles CSS communs, responsive mobile-first et menu burger</li>
+    <li><strong>Étape 11 :</strong> Finalisation côté client : suppression, accessibilité et optimisation</li>
+  </ol>
+
+  <h2>3. Fonctionnalités principales du MVP</h2>
+  <ul>
+    <li>CRUD complet pour utilisateurs et idées</li>
+    <li>Authentification et gestion des rôles</li>
+    <li>Upload et affichage d’images</li>
+    <li>Interface client dynamique et responsive</li>
+    <li>Accessibilité améliorée et compatibilité mobile</li>
+    <li>Code structuré et évolutif pour futures améliorations</li>
+  </ul>
+
+  <h2>4. Commandes essentielles</h2>
+  <pre><code>
+npm init -y
+npm install express mysql2 dotenv bcrypt jsonwebtoken joi multer twig
+npm install -D nodemon
+npm run dev
+  </code></pre>
+
+</section>
+
+<section id="etape-suivante">
+  <h2>Prochaine étape</h2>
+  <p>
+    Vous pouvez maintenant continuer à enrichir le projet avec de nouvelles fonctionnalités, améliorer le design, ajouter des tests unitaires ou passer en production.
+  </p>
+</section>
+</main>
+
+<footer>
+  <p>Projet Boîte à Idées – Récapitulatif</p>
+</footer>
+
+<script src="public/js/script.js"></script>
+</body>
+</html>
