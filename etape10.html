@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Étape 10 – Styles et accessibilité | Boîte à Idées</title>
+<title>Étape 10 – JS interactif | Boîte à Idées</title>
 <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <body>
@@ -30,54 +30,30 @@
 </header>
 
 <main>
-<section id="introduction">
-<h1>Étape 10 – Styles et accessibilité mobile-first</h1>
-<p>
-Nous allons créer un CSS commun pour toutes les pages, responsive et accessible, en priorité mobile-first.
-</p>
-</section>
-
-<section id="theorie">
-<pre><code>
-/* public/css/styles.css */
-body { font-family: Arial, sans-serif; margin:0; padding:0; line-height:1.5; }
-.navbar { display:flex; justify-content:space-between; align-items:center; padding:1rem; background:#333; color:#fff; }
-.nav-links { display:flex; gap:1rem; list-style:none; }
-.nav-links a { color:#fff; text-decoration:none; }
-.nav-toggle { display:none; background:none; border:none; color:#fff; font-size:1.5rem; }
-.idee { border:1px solid #ccc; padding:1rem; margin:0.5rem 0; }
-img { max-width:100%; height:auto; }
-
-@media(max-width:768px){
-  .nav-links { flex-direction:column; display:none; }
-  .nav-links.active { display:flex; }
-  .nav-toggle { display:block; }
-}
-</code></pre>
-</section>
-
-<section id="commandes">
+<section id="js-interactions">
+<h1>Étape 10 – Navigation et interactions JS</h1>
+<p>Menu burger responsive, toggles et filtres pour les idées.</p>
 <pre><code>
 // public/js/script.js
-const navToggle = document.getElementById("nav-toggle");
-const navLinks = document.getElementById("nav-links");
-navToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("active");
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
 });
 </code></pre>
 </section>
 
 <section id="recap">
 <ul>
-<li>CSS commun créé</li>
-<li>Responsive mobile-first</li>
-<li>Menu burger fonctionnel</li>
-<li>Accessibilité et lisibilité améliorées</li>
+<li>Menu burger interactif</li>
+<li>Navigation responsive mobile-first</li>
+<li>Possibilité d’ajouter filtres et modals JS</li>
 </ul>
 </section>
 
 <section id="etape-suivante">
-<p>Étape 11 : Finalisation et optimisation côté client.</p>
+<p>Étape 11 : Style, accessibilité et finalisation responsive.</p>
 </section>
 </main>
 

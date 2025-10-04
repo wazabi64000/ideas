@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Étape 8 – Formulaire client | Boîte à Idées</title>
+<title>Étape 8 – Affichage client | Boîte à Idées</title>
 <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <body>
@@ -31,51 +31,36 @@
 
 <main>
 <section id="introduction">
-<h1>Étape 8 – Formulaire client et affichage interactif</h1>
-<p>
-Nous ajoutons un formulaire HTML pour créer une idée directement depuis le client et l’afficher dynamiquement avec JavaScript.
-</p>
+<h1>Étape 8 – Affichage interactif des idées côté client</h1>
+<p>Nous allons créer des cartes pour afficher les idées de façon dynamique et responsive, en utilisant Twig pour récupérer les données depuis le serveur.</p>
 </section>
 
 <section id="theorie">
 <pre><code>
-<form id="ideeForm" enctype="multipart/form-data">
-  <input type="text" name="titre" placeholder="Titre" required>
-  <textarea name="description" placeholder="Description" required></textarea>
-  <input type="file" name="image" accept="image/*">
-  <button type="submit">Ajouter une idée</button>
-</form>
-
-<div id="listeIdees"></div>
-
-// public/js/script.js
-const form = document.getElementById("ideeForm");
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
-  const res = await fetch("/api/idees", {
-    method: "POST",
-    body: formData,
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("token")
-    }
-  });
-  const data = await res.json();
-  console.log(data);
-});
+// idees.twig – affichage des idées
+{% for idee in idees %}
+<article class="idee-card">
+  <h3>{{ idee.titre }}</h3>
+  <p>{{ idee.description }}</p>
+  {% if idee.image %}
+    <img src="/uploads/{{ idee.image }}" alt="Image de l'idée">
+  {% endif %}
+  <small>Créée par {{ idee.createur }} le {{ idee.dateCreation | date("d/m/Y") }}</small>
+</article>
+{% endfor %}
 </code></pre>
 </section>
 
 <section id="recap">
 <ul>
-<li>Formulaire client interactif créé</li>
-<li>Connexion JS avec l’API pour POST</li>
-<li>Préparation pour affichage dynamique côté client</li>
+<li>Cartes idéales pour affichage des idées</li>
+<li>Responsive et mobile-first</li>
+<li>Données Twig intégrées côté client</li>
 </ul>
 </section>
 
 <section id="etape-suivante">
-<p>Étape 9 : Affichage dynamique et mise à jour en temps réel.</p>
+<p>Étape 9 : Formulaire de création d’idées côté client avec upload d’image.</p>
 </section>
 </main>
 

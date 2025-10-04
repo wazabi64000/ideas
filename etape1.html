@@ -10,14 +10,8 @@
   <!-- NAVBAR -->
   <header>
     <nav class="navbar">
-      <div class="nav-logo">
-        <a href="index.html">Boîte à Idées</a>
-      </div>
-
-      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
-        ☰
-      </button>
-
+      <div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Introduction</a></li>
         <li><a href="etape1.html">Étape 1</a></li>
@@ -27,6 +21,10 @@
         <li><a href="etape5.html">Étape 5</a></li>
         <li><a href="etape6.html">Étape 6</a></li>
         <li><a href="etape7.html">Étape 7</a></li>
+        <li><a href="etape8.html">Étape 8</a></li>
+        <li><a href="etape9.html">Étape 9</a></li>
+        <li><a href="etape10.html">Étape 10</a></li>
+        <li><a href="etape11.html">Étape 11</a></li>
         <li><a href="recap.html">Récapitulatif</a></li>
       </ul>
     </nav>
@@ -36,173 +34,98 @@
     <!-- Introduction -->
     <section id="introduction">
       <h1>Étape 1 – Initiation du projet</h1>
-      <h2>1. Introduction à la thématique</h2>
       <p>
-        Dans cette première étape, nous allons poser les fondations de notre projet <strong>Boîte à Idées</strong>. 
-        L’objectif est de mettre en place une application **organisée, maintenable et évolutive**. 
-        Pour cela, nous utilisons le modèle **MVC (Model-View-Controller)**, qui sépare clairement : 
-      </p>
-      <ul>
-        <li><strong>Model</strong> : représente les données et leur logique (ex : utilisateurs, idées)</li>
-        <li><strong>View</strong> : s’occupe de l’affichage côté utilisateur, nous utiliserons Twig plus tard</li>
-        <li><strong>Controller</strong> : gère la logique métier, les requêtes et la communication entre Model et View</li>
-      </ul>
-      <p>
-        Cette étape consiste également à installer les dépendances nécessaires, créer l’arborescence de fichiers, et démarrer un serveur Express minimal pour tester notre configuration.
+        Dans cette étape, nous allons préparer le projet pour le développement. Nous allons créer l’arborescence de base, initialiser Node.js et installer les dépendances principales. Cela garantit un projet structuré et prêt pour la suite.
       </p>
     </section>
 
     <!-- Outils et dépendances -->
     <section id="outils">
-      <h2>2. Outils et dépendances</h2>
-
-      <h3>Outils nécessaires</h3>
+      <h2>Dépendances et outils</h2>
       <ul>
-        <li>Node.js (version 18 ou supérieure) pour exécuter le serveur</li>
-        <li>MySQL pour stocker nos données utilisateurs et idées</li>
-        <li>VS Code ou équivalent comme éditeur de code</li>
-        <li>Postman pour tester les routes API</li>
-        <li>Git pour versionner le projet et suivre l’évolution</li>
+        <li><strong>Node.js & npm :</strong> pour gérer le projet et installer les packages</li>
+        <li><strong>Express :</strong> framework web pour créer le serveur</li>
+        <li><strong>dotenv :</strong> pour gérer les variables d’environnement</li>
+        <li><strong>nodemon :</strong> pour relancer automatiquement le serveur lors des modifications</li>
+        <li><strong>mysql2 :</strong> pour interagir avec la base de données MySQL</li>
+        <li><strong>Joi :</strong> pour la validation des données</li>
+        <li><strong>Twig :</strong> moteur de templates côté serveur</li>
+        <li><strong>bcrypt, jsonwebtoken :</strong> pour l’authentification et la sécurité</li>
+        <li><strong>Multer :</strong> pour l’upload des images</li>
       </ul>
-
-      <h3>Dépendances et explications détaillées</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Description détaillée</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>express</td>
-            <td>Framework serveur pour Node.js, permettant de créer des routes, gérer les requêtes et les réponses facilement.</td>
-          </tr>
-          <tr>
-            <td>mysql2</td>
-            <td>Permet de se connecter à une base MySQL, exécuter des requêtes et récupérer les données.</td>
-          </tr>
-          <tr>
-            <td>dotenv</td>
-            <td>Permet de stocker les variables sensibles (comme les identifiants DB ou clés secrètes) dans un fichier .env, pour ne pas les exposer dans le code.</td>
-          </tr>
-          <tr>
-            <td>bcrypt</td>
-            <td>Permet de hasher les mots de passe utilisateurs avant de les stocker en base pour sécuriser les données.</td>
-          </tr>
-          <tr>
-            <td>jsonwebtoken</td>
-            <td>Création et vérification de tokens JWT pour gérer l’authentification des utilisateurs.</td>
-          </tr>
-          <tr>
-            <td>joi</td>
-            <td>Validation des données entrantes pour s’assurer que les informations envoyées par l’utilisateur respectent les règles attendues.</td>
-          </tr>
-          <tr>
-            <td>multer</td>
-            <td>Gestion des uploads de fichiers (images), avec possibilité de limiter la taille et le type de fichier.</td>
-          </tr>
-          <tr>
-            <td>twig</td>
-            <td>Moteur de templates pour générer des pages HTML dynamiques côté serveur.</td>
-          </tr>
-          <tr>
-            <td>nodemon</td>
-            <td>Outil de développement qui redémarre automatiquement le serveur quand on modifie un fichier.</td>
-          </tr>
-        </tbody>
-      </table>
     </section>
 
-    <!-- Théorie / explication du code -->
+    <!-- Théorie et code -->
     <section id="theorie">
-      <h2>3. Explication détaillée du code</h2>
-      <p>Nous allons créer un serveur minimal Express dans le fichier <code>server.js</code>. Chaque partie a un rôle précis :</p>
-
+      <h2>Théorie et code</h2>
+      <p>
+        L’objectif ici est de créer la structure initiale et d’installer les dépendances. Voici un exemple de commandes et d’arborescence :
+      </p>
       <pre><code>
-// Import des modules nécessaires
-import express from "express";   // Framework serveur
-import dotenv from "dotenv";     // Gestion des variables d'environnement
-
-// Initialisation des variables d'environnement
-dotenv.config();
-
-// Création de l'application Express
-const app = express();
-
-// Middleware global pour parser le JSON
-app.use(express.json());
-
-// Route de test pour vérifier que le serveur fonctionne
-app.get("/", (req, res) => {
-  res.send("Bienvenue sur la Boîte à Idées");
-});
-
-// Démarrage du serveur sur le port défini dans .env ou 3000
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Serveur en ligne sur le port ${PORT}`);
-});
-      </code></pre>
-
-      <p><strong>Explications :</strong></p>
-      <ul>
-        <li><code>import express</code> : on importe le framework Express pour créer le serveur.</li>
-        <li><code>dotenv.config()</code> : charge les variables depuis le fichier .env.</li>
-        <li><code>app.use(express.json())</code> : permet à Express de comprendre le format JSON des requêtes.</li>
-        <li>La route <code>app.get("/", ...)</code> renvoie un simple message pour tester le serveur.</li>
-        <li><code>app.listen(PORT,...)</code> démarre le serveur et écoute sur le port défini.</li>
-      </ul>
-    </section>
-
-    <!-- Commandes à exécuter -->
-    <section id="commandes">
-      <h2>4. Commandes à exécuter</h2>
-      <pre><code>
-# Initialisation du projet Node.js
+# Initialisation du projet
 npm init -y
 
 # Installation des dépendances principales
-npm install express mysql2 dotenv bcrypt jsonwebtoken joi multer twig
+npm install express dotenv nodemon mysql2 joi twig bcrypt jsonwebtoken multer body-parser
 
-# Installation de nodemon en dev
-npm install -D nodemon
+# Arborescence proposée
+boite-a-idees/
+├─ config/
+│  └─ db.js
+├─ controllers/
+├─ middleware/
+├─ models/
+├─ routes/
+├─ views/
+│  ├─ layout.twig
+│  ├─ idees.twig
+│  └─ nouvelle-idee.twig
+├─ public/
+│  ├─ css/styles.css
+│  └─ js/script.js
+├─ uploads/
+├─ .env
+└─ server.js
+      </code></pre>
+      <p>
+        Cette structure permet de séparer clairement la configuration, la logique métier, les routes, les modèles, les vues et les fichiers statiques.
+      </p>
+    </section>
 
-# Ajout du script pour lancer le serveur en dev
-# Dans package.json :
-"scripts": {
-  "dev": "nodemon server.js"
-}
+    <!-- Commandes -->
+    <section id="commandes">
+      <h2>Commandes et exécution</h2>
+      <pre><code>
+# Lancer le serveur en développement
+npx nodemon server.js
 
-# Démarrage du serveur
-npm run dev
+# Vérifier que le projet démarre correctement
+node server.js
       </code></pre>
     </section>
 
     <!-- Récapitulatif -->
     <section id="recap">
-      <h2>5. Récapitulatif</h2>
+      <h2>Récapitulatif</h2>
       <ul>
-        <li>Arborescence MVC créée</li>
-        <li>Dépendances installées et expliquées</li>
-        <li>Serveur Express minimal fonctionnel</li>
-        <li>Message de bienvenue affiché sur <code>http://localhost:3000</code></li>
+        <li>Projet Node.js initialisé</li>
+        <li>Dépendances principales installées</li>
+        <li>Arborescence du projet définie</li>
+        <li>Projet prêt pour la configuration de la base de données</li>
       </ul>
     </section>
 
     <!-- Étape suivante -->
     <section id="etape-suivante">
-      <h2>6. Étape suivante</h2>
+      <h2>Étape suivante</h2>
       <p>
-        Étape 2 : Configuration de la base de données MySQL et création des modèles.
-        Nous allons créer les tables <code>users</code> et <code>idees</code>, 
-        configurer la connexion dans <code>/config/db.js</code> et tester la liaison avec le serveur.
+        Passons maintenant à <a href="etape2.html">Étape 2 – Configuration de la base de données et modèles</a>.
       </p>
     </section>
   </main>
 
   <footer>
-    <p>Projet Boîte à Idées – Formation Fullstack | Étape 1</p>
+    <p>Projet Boîte à Idées – Étape 1</p>
   </footer>
 
   <script src="public/js/script.js"></script>

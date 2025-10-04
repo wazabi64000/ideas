@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Étape 5 – Authentification et rôles | Boîte à Idées</title>
+  <title>Étape 5 – Authentification | Boîte à Idées</title>
   <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <body>
@@ -31,78 +31,118 @@
 
 <main>
 <section id="introduction">
-  <h1>Étape 5 – Authentification avancée et gestion des rôles</h1>
-  <h2>1. Introduction à la thématique</h2>
-  <p>
-    Nous allons renforcer l’authentification en ajoutant la gestion des rôles (user/admin).  
-    Certaines routes seront désormais restreintes aux administrateurs.
-  </p>
+<h1>Étape 5 – Authentification et gestion des rôles</h1>
+<p>
+Cette étape consiste à sécuriser l’application avec un système d’inscription, de connexion et de gestion des rôles (utilisateur/admin). 
+Nous allons créer les routes backend et les formulaires Twig côté client.
+</p>
 </section>
 
 <section id="outils">
-  <h2>2. Outils et dépendances</h2>
-  <ul>
-    <li>jsonwebtoken pour générer et vérifier les tokens</li>
-    <li>Middleware d’autorisation pour contrôler l’accès selon le rôle</li>
-  </ul>
+<h2>Outils et dépendances</h2>
+<ul>
+<li>bcrypt – Hashage des mots de passe</li>
+<li>jsonwebtoken – Création et validation de tokens JWT</li>
+<li>Joi – Validation des données</li>
+<li>Twig – Rendu des formulaires côté client</li>
+</ul>
 </section>
 
 <section id="theorie">
-  <h2>3. Théorie et code</h2>
-  <pre><code>
-// middleware/role.js
-export const authorizeRole = (role) => {
-  return (req, res, next) => {
-    if(req.user.role !== role) return res.status(403).json({ error: "Accès refusé" });
-    next();
-  };
-};
-
-// routes/ideeRoutes.js
+<h2>Théorie et code</h2>
+<pre><code>
+// server.js – exemple minimal pour inscription/connexion
 import express from "express";
-import { IdeeController } from "../controllers/ideeController.js";
-import { authenticateToken } from "../middleware/auth.js";
-import { authorizeRole } from "../middleware/role.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { body, validationResult } from "express-validator";
+import UserModel from "./models/user.js";
 
-const router = express.Router();
-router.post("/", authenticateToken, IdeeController.create);
-router.get("/", authenticateToken, IdeeController.findAll);
-router.delete("/:id", authenticateToken, authorizeRole("admin"), IdeeController.delete);
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-export default router;
-  </code></pre>
+// Route inscription
+app.post("/register", async (req, res) => {
+  const { pseudo, email, password, role } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  await UserModel.create({ pseudo, email, password: hashedPassword, role });
+  res.redirect("/login");
+});
+
+// Route connexion
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await UserModel.findByEmail(email);
+  if(!user) return res.status(401).send("Utilisateur non trouvé");
+  const valid = await bcrypt.compare(password, user.password);
+  if(!valid) return res.status(401).send("Mot de passe incorrect");
+  const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  res.cookie("token", token, { httpOnly: true });
+  res.redirect("/idees");
+});
+</code></pre>
 </section>
 
-<section id="commandes">
-  <h2>4. Commandes à exécuter</h2>
-  <pre><code>
-# Créer le middleware role.js
-# Ajouter les routes idées à server.js
-import ideeRoutes from "./routes/ideeRoutes.js";
-app.use("/api/idees", ideeRoutes);
-  </code></pre>
+<section id="formulaires">
+<h2>Formulaires côté client (Twig)</h2>
+
+<h3>Inscription – register.twig</h3>
+<pre><code>
+<form action="/register" method="POST">
+  <label>Pseudo :</label>
+  <input type="text" name="pseudo" required>
+
+  <label>Email :</label>
+  <input type="email" name="email" required>
+
+  <label>Mot de passe :</label>
+  <input type="password" name="password" required>
+
+  <label>Rôle :</label>
+  <select name="role">
+    <option value="user" selected>User</option>
+    <option value="admin">Admin</option>
+  </select>
+
+  <button type="submit">S'inscrire</button>
+</form>
+</code></pre>
+
+<h3>Connexion – login.twig</h3>
+<pre><code>
+<form action="/login" method="POST">
+  <label>Email :</label>
+  <input type="email" name="email" required>
+
+  <label>Mot de passe :</label>
+  <input type="password" name="password" required>
+
+  <button type="submit">Se connecter</button>
+</form>
+</code></pre>
 </section>
 
 <section id="recap">
-  <h2>5. Récapitulatif</h2>
-  <ul>
-    <li>Routes sécurisées selon le rôle</li>
-    <li>Middleware d’autorisation mis en place</li>
-    <li>CRUD utilisateurs et idées protégé</li>
-  </ul>
+<h2>Récapitulatif</h2>
+<ul>
+<li>Routes backend `/register` et `/login` créées</li>
+<li>Hashage des mots de passe avec bcrypt</li>
+<li>JWT pour sécuriser les sessions</li>
+<li>Formulaires Twig côté client prêts à l’emploi</li>
+<li>Gestion des rôles `user` / `admin` intégrée</li>
+</ul>
 </section>
 
 <section id="etape-suivante">
-  <h2>6. Étape suivante</h2>
-  <p>
-    Étape 6 : Upload d’images avec Multer pour ajouter des images aux idées.
-  </p>
+<p>Étape 6 : Upload d’images avec Multer et intégration côté serveur.</p>
 </section>
 </main>
 
 <footer>
-  <p>Projet Boîte à Idées – Étape 5</p>
+<p>Projet Boîte à Idées – Étape 5</p>
 </footer>
+
 <script src="public/js/script.js"></script>
 </body>
 </html>

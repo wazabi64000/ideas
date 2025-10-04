@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Étape 11 – Finalisation client | Boîte à Idées</title>
+<title>Étape 11 – Style et accessibilité | Boîte à Idées</title>
 <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <body>
@@ -30,47 +30,69 @@
 </header>
 
 <main>
-<section id="introduction">
-<h1>Étape 11 – Finalisation et optimisation côté client</h1>
-<p>
-Nous finalisons l’application côté client : interface intuitive, validation, affichage en temps réel, et compatibilité mobile.
-</p>
-</section>
-
-<section id="theorie">
+<section id="style-accessibilite">
+<h1>Étape 11 – Style et accessibilité</h1>
+<p>Finalisation du design, respect des standards d’accessibilité et rendu responsive.</p>
 <pre><code>
-// public/js/script.js
-// Gestion de la création, affichage et suppression côté client
-async function supprimerIdee(id){
-  await fetch("/api/idees/" + id, {
-    method: "DELETE",
-    headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-  });
-  chargerIdees();
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
 }
 
-// Optimisation : éviter rechargement complet, améliorer accessibilité
-listeIdees.addEventListener("click", (e) => {
-  if(e.target.classList.contains("deleteBtn")){
-    supprimerIdee(e.target.dataset.id);
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0077cc;
+  color: #fff;
+  padding: 0.5rem 1rem;
+}
+
+.nav-links li {
+  list-style: none;
+  margin-left: 1rem;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-links.active {
+  display: block;
+}
+
+/* Cartes idées */
+.idee-card {
+  background-color: #fff;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Responsive mobile-first */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
   }
-});
+}
 </code></pre>
 </section>
 
 <section id="recap">
 <ul>
-<li>Fonctionnalités complètes côté client</li>
-<li>Affichage temps réel et suppression</li>
-<li>Compatibilité mobile et accessibilité</li>
-<li>Projet prêt pour production minimale (MVP)</li>
+<li>Design finalisé</li>
+<li>Contraste et focus accessibles</li>
+<li>Mobile-first, responsive et navigation intuitive</li>
+<li>Projet prêt pour le déploiement</li>
 </ul>
-</section>
-
-<section id="etape-suivante">
-<p>
-Toutes les étapes principales du projet sont complétées.
-</p>
 </section>
 </main>
 

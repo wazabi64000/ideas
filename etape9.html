@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Étape 9 – Affichage dynamique | Boîte à Idées</title>
+<title>Étape 9 – Formulaire client | Boîte à Idées</title>
 <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <body>
@@ -30,54 +30,35 @@
 </header>
 
 <main>
-<section id="introduction">
-<h1>Étape 9 – Affichage dynamique et mise à jour</h1>
-<p>
-Nous allons afficher toutes les idées existantes côté client et mettre à jour la liste après création.
-</p>
-</section>
-
-<section id="theorie">
+<section id="formulaire">
+<h1>Étape 9 – Formulaire création d’idée</h1>
+<p>Formulaire interactif avec validation minimale et upload d’image côté client.</p>
 <pre><code>
-// public/js/script.js
-const listeIdees = document.getElementById("listeIdees");
+<form action="/idees" method="POST" enctype="multipart/form-data">
+  <label for="titre">Titre :</label>
+  <input type="text" name="titre" id="titre" required>
 
-async function chargerIdees() {
-  const res = await fetch("/api/idees", {
-    headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-  });
-  const data = await res.json();
-  listeIdees.innerHTML = data.map(idee => `
-    <div class="idee">
-      <h3>${idee.titre}</h3>
-      <p>${idee.description}</p>
-      ${idee.image ? `<img src="/uploads/${idee.image}" alt="Image de l'idée">` : ""}
-    </div>
-  `).join("");
-}
+  <label for="description">Description :</label>
+  <textarea name="description" id="description" rows="4" required></textarea>
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
-  await fetch("/api/idees", { method: "POST", body: formData, headers: { Authorization: "Bearer " + localStorage.getItem("token") }});
-  form.reset();
-  chargerIdees();
-});
+  <label for="image">Image :</label>
+  <input type="file" name="image" id="image" accept="image/*">
 
-window.onload = chargerIdees;
+  <button type="submit">Ajouter l'idée</button>
+</form>
 </code></pre>
 </section>
 
 <section id="recap">
 <ul>
-<li>Liste dynamique des idées côté client</li>
-<li>Actualisation après ajout</li>
-<li>Interaction complète avec l’API</li>
+<li>Formulaire Twig prêt côté client</li>
+<li>Upload d’image intégré via Multer</li>
+<li>Validation HTML minimale pour les champs requis</li>
 </ul>
 </section>
 
 <section id="etape-suivante">
-<p>Étape 10 : Styles et accessibilité mobile-first.</p>
+<p>Étape 10 : Navigation et interactions avec JavaScript.</p>
 </section>
 </main>
 

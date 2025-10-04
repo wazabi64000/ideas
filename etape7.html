@@ -32,12 +32,11 @@
 <main>
 <section id="introduction">
 <h1>Étape 7 – Intégration Twig côté serveur</h1>
-<p>
-Nous allons utiliser Twig pour générer dynamiquement les pages HTML côté serveur. Chaque idée pourra être affichée avec ses informations et image.
-</p>
+<p>Nous allons utiliser Twig pour générer dynamiquement les pages HTML côté serveur. Chaque idée pourra être affichée avec ses informations et image.</p>
 </section>
 
 <section id="outils">
+<h2>Dépendances</h2>
 <ul>
 <li>twig pour le rendu des templates</li>
 <li>Express adapter pour Twig</li>
@@ -45,6 +44,7 @@ Nous allons utiliser Twig pour générer dynamiquement les pages HTML côté ser
 </section>
 
 <section id="theorie">
+<h2>Code côté serveur</h2>
 <pre><code>
 // server.js
 import express from "express";
@@ -54,7 +54,7 @@ import path from "path";
 app.set("view engine", "twig");
 app.set("views", path.join(__dirname, "views"));
 
-// routes pour afficher toutes les idées
+// route pour afficher toutes les idées
 router.get("/idees", authenticateToken, async (req, res) => {
   IdeeModel.findAll((err, idees) => {
     if(err) return res.status(500).send(err);
@@ -65,6 +65,7 @@ router.get("/idees", authenticateToken, async (req, res) => {
 </section>
 
 <section id="commandes">
+<h2>Commandes</h2>
 <pre><code>
 # Créer dossier views
 mkdir views
@@ -84,6 +85,7 @@ touch views/idees.twig
 </section>
 
 <section id="recap">
+<h2>Récapitulatif</h2>
 <ul>
 <li>Twig configuré avec Express</li>
 <li>Templates dynamiques pour afficher les idées</li>
@@ -92,9 +94,7 @@ touch views/idees.twig
 </section>
 
 <section id="etape-suivante">
-<p>
-Étape 8 : Création du formulaire client et affichage interactif des idées.
-</p>
+<p>Étape 8 : Création du formulaire client et affichage interactif des idées.</p>
 </section>
 </main>
 
