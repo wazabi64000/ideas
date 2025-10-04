@@ -1,153 +1,203 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boîte à Idées – Guide complet</title>
-  <link rel="stylesheet" href="public/css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boîte à Idées – Guide complet</title>
+<link rel="stylesheet" href="public/css/styles.css">
+
 </head>
 <body>
-  <!-- NAVBAR -->
-  <header>
-    <nav class="navbar">
-      <div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="index.html">Introduction</a></li>
-        <li><a href="etape1.html">Étape 1</a></li>
-        <li><a href="etape2.html">Étape 2</a></li>
-        <li><a href="etape3.html">Étape 3</a></li>
-        <li><a href="etape4.html">Étape 4</a></li>
-        <li><a href="etape5.html">Étape 5</a></li>
-        <li><a href="etape6.html">Étape 6</a></li>
-        <li><a href="etape7.html">Étape 7</a></li>
-        <li><a href="etape8.html">Étape 8</a></li>
-        <li><a href="etape9.html">Étape 9</a></li>
-        <li><a href="etape10.html">Étape 10</a></li>
-        <li><a href="etape11.html">Étape 11</a></li>
-        <li><a href="recap.html">Récapitulatif</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <!-- Introduction générale -->
-    <section id="introduction">
-      <h1>Bienvenue dans le projet « Boîte à Idées »</h1>
-      <p>
-        Ce guide complet vous accompagne pas à pas dans la création d'une application fullstack moderne avec <strong>Node.js (Express ESM), MySQL et Twig</strong>. 
-        Vous apprendrez à structurer un projet MVC, créer un CRUD complet, gérer l’authentification et les rôles, permettre l’upload d’images, et construire une interface client responsive et accessible.
-      </p>
-    </section>
+<header>
+  <nav class="navbar">
+    <div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Introduction</a></li>
+      <li><a href="etape1.html">Étape 1</a></li>
+      <li><a href="etape2.html">Étape 2</a></li>
+      <li><a href="etape3.html">Étape 3</a></li>
+      <li><a href="etape4.html">Étape 4</a></li>
+      <li><a href="etape5.html">Étape 5</a></li>
+      <li><a href="etape6.html">Étape 6</a></li>
+      <li><a href="etape7.html">Étape 7</a></li>
+      <li><a href="etape8.html">Étape 8</a></li>
+      <li><a href="etape9.html">Étape 9</a></li>
+      <li><a href="etape10.html">Étape 10</a></li>
+      <li><a href="etape11.html">Étape 11</a></li>
+      <li><a href="recap.html">Récapitulatif</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <!-- Présentation des étapes -->
-    <section id="etapes">
-      <h2>Résumé des étapes et correspondance RNCP</h2>
+<main>
+<section id="introduction">
+  <h1>Bienvenue dans le projet « Boîte à Idées »</h1>
+  <p>
+    Ce guide complet vous accompagne pas à pas dans la création d'une application web fullstack moderne avec :
+  </p>
+  <ul>
+    <li>Node.js et Express ESM côté serveur</li>
+    <li>Base de données MySQL</li>
+    <li>Template Twig pour le rendu dynamique</li>
+    <li>Front-end responsive et accessible</li>
+    <li>CRUD complet, authentification et gestion des rôles</li>
+  </ul>
+  <p>Le projet sera développé progressivement au fil des étapes, chaque étape ajoutant une fonctionnalité ou améliorant le code existant.</p>
+</section>
 
-      <!-- Étape 1 -->
-      <article class="etape">
-        <h3>Étape 1 – Initiation du projet</h3>
-        <p><strong>Objectif :</strong> Créer l’arborescence et installer les dépendances pour préparer le projet.</p>
-        <p><strong>Dépendances :</strong> Express, dotenv, nodemon, mysql2, Joi, Twig, bcrypt, jsonwebtoken, multer</p>
-        <p><strong>Logique / Code :</strong> Initialisation npm, structure des dossiers, configuration du serveur minimal.</p>
-        <p><a href="etape1.html">Voir l’étape 1 complète</a></p>
+<section id="modules">
+  <h2>Modules RNCP Développeur Web / Web Mobile</h2>
+  <p>Voici les modules et compétences professionnelles validés ou en cours de validation dans ce projet :</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Sigle</th>
+        <th>Type de document</th>
+        <th>Code</th>
+        <th>Titre</th>
+        <th>Millésime</th>
+        <th>Date de validation</th>
+        <th>Date mise à jour</th>
+        <th>Page</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>DWWM</td>
+        <td>REAC</td>
+        <td>TP-01280</td>
+        <td>Installer et configurer son environnement de travail</td>
+        <td>04</td>
+        <td>24/05/2023</td>
+        <td>24/05/2023</td>
+        <td>8/40</td>
+      </tr>
+    </tbody>
+  </table>
 
-        <section class="rncp">
-          <h4>Correspondance RNCP DWWM</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>SIGLE</th><th>Type de doc</th><th>Titre</th><th>Millésime</th><th>Validation</th><th>Mise à jour</th><th>Page</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>DWWM</td><td>TP-01280</td><td>Installer et configurer son environnement</td><td>04</td><td>24/05/2023</td><td>24/05/2023</td><td>8/40</td>
-              </tr>
-            </tbody>
-          </table>
-          <p><strong>Activités professionnelles :</strong> AP 1 – Installer et configurer son environnement, AP 2 – Maquetter des interfaces</p>
-        </section>
-      </article>
+  <h3>Compétences professionnelles couvertes par le projet :</h3>
+  <ul>
+    <li>1 – Installer et configurer l’environnement de travail selon le projet web ou mobile</li>
+    <li>2 – Maquetter des interfaces utilisateur web ou web mobile</li>
+    <li>3 – Réaliser des interfaces statiques web ou mobile</li>
+    <li>4 – Développer la partie front-end dynamique d’une application sécurisée</li>
+    <li>5 – Mettre en place une base de données relationnelle</li>
+    <li>6 – Développer des composants d’accès aux données SQL et NoSQL</li>
+    <li>7 – Développer des composants métier côté serveur</li>
+    <li>8 – Documenter le déploiement d’une application web ou mobile dynamique</li>
+  </ul>
+</section>
 
-      <!-- Étape 2 -->
-      <article class="etape">
-        <h3>Étape 2 – Base de données et modèles</h3>
-        <p><strong>Objectif :</strong> Créer les tables <code>users</code> et <code>idees</code>, configurer les modèles côté serveur.</p>
-        <p><strong>Dépendances :</strong> mysql2, dotenv</p>
-        <p><strong>Logique / Code :</strong> Pool MySQL, export des modèles pour le contrôleur.</p>
-        <p><a href="etape2.html">Voir l’étape 2 complète</a></p>
+<section id="etapes">
+  <h2>Résumé des étapes</h2>
 
-        <section class="rncp">
-          <h4>Correspondance RNCP</h4>
-          <p><strong>Activité professionnelle :</strong> AP 5 – Mettre en place une base de données relationnelle</p>
-        </section>
-      </article>
+  <article>
+    <h3>Étape 1 – Initiation du projet</h3>
+    <ul>
+      <li>Création de l’arborescence et installation des dépendances</li>
+      <li>Configuration initiale du serveur Express</li>
+      <li><a href="etape1.html">Voir l’étape 1</a></li>
+    </ul>
+  </article>
 
-      <!-- Étape 3 -->
-      <article class="etape">
-        <h3>Étape 3 – Validation et middlewares</h3>
-        <p><strong>Objectif :</strong> Sécuriser l’API en validant les données avec Joi et créer les middlewares.</p>
-        <p><strong>Dépendances :</strong> Joi, Express</p>
-        <p><strong>Logique / Code :</strong> Schémas de validation, middleware global pour intercepter et gérer les erreurs.</p>
-        <p><a href="etape3.html">Voir l’étape 3 complète</a></p>
+  <article>
+    <h3>Étape 2 – Base de données et modèles</h3>
+    <ul>
+      <li>Création des tables <code>users</code> et <code>idees</code> dans MySQL</li>
+      <li>Définition des modèles côté serveur</li>
+      <li><a href="etape2.html">Voir l’étape 2</a></li>
+    </ul>
+  </article>
 
-        <section class="rncp">
-          <p><strong>Activité professionnelle :</strong> AP 4 – Développer la partie front-end sécurisée</p>
-        </section>
-      </article>
+  <article>
+    <h3>Étape 3 – Validation et middlewares</h3>
+    <ul>
+      <li>Validation des données avec Joi</li>
+      <li>Création des middlewares pour sécuriser l’API</li>
+      <li><a href="etape3.html">Voir l’étape 3</a></li>
+    </ul>
+  </article>
 
-      <!-- Étape 4 -->
-      <article class="etape">
-        <h3>Étape 4 – Routes et contrôleurs</h3>
-        <p><strong>Objectif :</strong> Créer les routes Express et relier les contrôleurs aux modèles.</p>
-        <p><strong>Dépendances :</strong> Express</p>
-        <p><strong>Logique / Code :</strong> Définir routes GET, POST, PUT, DELETE ; utiliser les middlewares de validation.</p>
-        <p><a href="etape4.html">Voir l’étape 4 complète</a></p>
+  <article>
+    <h3>Étape 4 – Routes et contrôleurs</h3>
+    <ul>
+      <li>Définition des routes GET, POST, PUT, DELETE</li>
+      <li>Connexion des contrôleurs aux modèles</li>
+      <li><a href="etape4.html">Voir l’étape 4</a></li>
+    </ul>
+  </article>
 
-        <section class="rncp">
-          <p><strong>Activité professionnelle :</strong> AP 6 – Développer des composants d’accès aux données SQL et NoSQL</p>
-        </section>
-      </article>
+  <article>
+    <h3>Étape 5 – Authentification et gestion des rôles</h3>
+    <ul>
+      <li>Hashage des mots de passe avec bcrypt</li>
+      <li>JWT pour authentification et contrôle d’accès</li>
+      <li><a href="etape5.html">Voir l’étape 5</a></li>
+    </ul>
+  </article>
 
-      <!-- Étape 5 -->
-      <article class="etape">
-        <h3>Étape 5 – Authentification et gestion des rôles</h3>
-        <p><strong>Objectif :</strong> Sécuriser l’accès avec JWT et gérer les rôles admin/user.</p>
-        <p><strong>Dépendances :</strong> bcrypt, jsonwebtoken</p>
-        <p><strong>Logique / Code :</strong> Hashage des mots de passe, génération et vérification du token, contrôle des rôles.</p>
-        <p><a href="etape5.html">Voir l’étape 5 complète</a></p>
+  <article>
+    <h3>Étape 6 – Upload d’images</h3>
+    <ul>
+      <li>Upload avec Multer limité à 2 Mo</li>
+      <li>Stockage dans <code>public/uploads</code></li>
+      <li><a href="etape6.html">Voir l’étape 6</a></li>
+    </ul>
+  </article>
 
-        <section class="rncp">
-          <p><strong>Activité professionnelle :</strong> AP 7 – Développer des composants métier côté serveur</p>
-        </section>
-      </article>
+  <article>
+    <h3>Étape 7 – Intégration Twig</h3>
+    <ul>
+      <li>Templates dynamiques pour afficher les idées</li>
+      <li>Préparation des pages côté serveur</li>
+      <li><a href="etape7.html">Voir l’étape 7</a></li>
+    </ul>
+  </article>
 
-      <!-- Étapes 6 à 11 simplifiées pour clarté -->
-      <article class="etape">
-        <h3>Étapes 6 à 11 – Upload, Twig, Front-end et accessibilité</h3>
-        <ul>
-          <li><strong>Étape 6 :</strong> Upload d’images Multer</li>
-          <li><strong>Étape 7 :</strong> Intégration Twig</li>
-          <li><strong>Étape 8 :</strong> Affichage côté client</li>
-          <li><strong>Étape 9 :</strong> Formulaire création idée côté client</li>
-          <li><strong>Étape 10 :</strong> Navigation et interactions JS</li>
-          <li><strong>Étape 11 :</strong> Styles et accessibilité</li>
-        </ul>
-        <p><a href="etape6.html">Voir toutes les étapes 6 à 11 complètes</a></p>
+  <article>
+    <h3>Étape 8 – Affichage côté client</h3>
+    <ul>
+      <li>Cartes d’idées responsive</li>
+      <li>Affichage des informations du créateur</li>
+      <li><a href="etape8.html">Voir l’étape 8</a></li>
+    </ul>
+  </article>
 
-        <section class="rncp">
-          <p><strong>Activités professionnelles :</strong> AP 4 à AP 8 – Développement front-end et back-end dynamique, accessibilité et déploiement</p>
-        </section>
-      </article>
+  <article>
+    <h3>Étape 9 – Formulaire création côté client</h3>
+    <ul>
+      <li>Formulaire interactif avec upload d’image</li>
+      <li>Validation minimale côté client</li>
+      <li><a href="etape9.html">Voir l’étape 9</a></li>
+    </ul>
+  </article>
 
-    </section>
-  </main>
+  <article>
+    <h3>Étape 10 – Navigation et interactions JS</h3>
+    <ul>
+      <li>Menu burger responsive</li>
+      <li>Filtres et modals interactifs</li>
+      <li><a href="etape10.html">Voir l’étape 10</a></li>
+    </ul>
+  </article>
 
-  <footer>
-    <p>Projet Boîte à Idées – Guide complet avec correspondance RNCP</p>
-  </footer>
+  <article>
+    <h3>Étape 11 – Style et accessibilité</h3>
+    <ul>
+      <li>CSS finalisé, mobile-first et accessible</li>
+      <li>Prêt pour le déploiement</li>
+      <li><a href="etape11.html">Voir l’étape 11</a></li>
+    </ul>
+  </article>
+</section>
+</main>
 
-  <script src="public/js/script.js"></script>
+</main>
+
+<footer>
+<p>Projet Boîte à Idées – Guide complet</p>
+</footer>
+
 </body>
 </html>
