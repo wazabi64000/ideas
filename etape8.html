@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Étape 8 – Formulaire client | Boîte à Idées</title>
+<link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+<header>
+<nav class="navbar">
+<div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+<button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+<ul class="nav-links" id="nav-links">
+<li><a href="index.html">Introduction</a></li>
+<li><a href="etape1.html">Étape 1</a></li>
+<li><a href="etape2.html">Étape 2</a></li>
+<li><a href="etape3.html">Étape 3</a></li>
+<li><a href="etape4.html">Étape 4</a></li>
+<li><a href="etape5.html">Étape 5</a></li>
+<li><a href="etape6.html">Étape 6</a></li>
+<li><a href="etape7.html">Étape 7</a></li>
+<li><a href="etape8.html">Étape 8</a></li>
+<li><a href="etape9.html">Étape 9</a></li>
+<li><a href="etape10.html">Étape 10</a></li>
+<li><a href="etape11.html">Étape 11</a></li>
+<li><a href="recap.html">Récapitulatif</a></li>
+</ul>
+</nav>
+</header>
+
+<main>
+<section id="introduction">
+<h1>Étape 8 – Formulaire client et affichage interactif</h1>
+<p>
+Nous ajoutons un formulaire HTML pour créer une idée directement depuis le client et l’afficher dynamiquement avec JavaScript.
+</p>
+</section>
+
+<section id="theorie">
+<pre><code>
+<form id="ideeForm" enctype="multipart/form-data">
+  <input type="text" name="titre" placeholder="Titre" required>
+  <textarea name="description" placeholder="Description" required></textarea>
+  <input type="file" name="image" accept="image/*">
+  <button type="submit">Ajouter une idée</button>
+</form>
+
+<div id="listeIdees"></div>
+
+// public/js/script.js
+const form = document.getElementById("ideeForm");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const res = await fetch("/api/idees", {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token")
+    }
+  });
+  const data = await res.json();
+  console.log(data);
+});
+</code></pre>
+</section>
+
+<section id="recap">
+<ul>
+<li>Formulaire client interactif créé</li>
+<li>Connexion JS avec l’API pour POST</li>
+<li>Préparation pour affichage dynamique côté client</li>
+</ul>
+</section>
+
+<section id="etape-suivante">
+<p>Étape 9 : Affichage dynamique et mise à jour en temps réel.</p>
+</section>
+</main>
+
+<footer>
+<p>Projet Boîte à Idées – Étape 8</p>
+</footer>
+<script src="public/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Étape 5 – Authentification et rôles | Boîte à Idées</title>
+  <link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+<header>
+  <nav class="navbar">
+    <div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Introduction</a></li>
+      <li><a href="etape1.html">Étape 1</a></li>
+      <li><a href="etape2.html">Étape 2</a></li>
+      <li><a href="etape3.html">Étape 3</a></li>
+      <li><a href="etape4.html">Étape 4</a></li>
+      <li><a href="etape5.html">Étape 5</a></li>
+      <li><a href="etape6.html">Étape 6</a></li>
+      <li><a href="etape7.html">Étape 7</a></li>
+      <li><a href="etape8.html">Étape 8</a></li>
+      <li><a href="etape9.html">Étape 9</a></li>
+      <li><a href="etape10.html">Étape 10</a></li>
+      <li><a href="etape11.html">Étape 11</a></li>
+      <li><a href="recap.html">Récapitulatif</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<section id="introduction">
+  <h1>Étape 5 – Authentification avancée et gestion des rôles</h1>
+  <h2>1. Introduction à la thématique</h2>
+  <p>
+    Nous allons renforcer l’authentification en ajoutant la gestion des rôles (user/admin).  
+    Certaines routes seront désormais restreintes aux administrateurs.
+  </p>
+</section>
+
+<section id="outils">
+  <h2>2. Outils et dépendances</h2>
+  <ul>
+    <li>jsonwebtoken pour générer et vérifier les tokens</li>
+    <li>Middleware d’autorisation pour contrôler l’accès selon le rôle</li>
+  </ul>
+</section>
+
+<section id="theorie">
+  <h2>3. Théorie et code</h2>
+  <pre><code>
+// middleware/role.js
+export const authorizeRole = (role) => {
+  return (req, res, next) => {
+    if(req.user.role !== role) return res.status(403).json({ error: "Accès refusé" });
+    next();
+  };
+};
+
+// routes/ideeRoutes.js
+import express from "express";
+import { IdeeController } from "../controllers/ideeController.js";
+import { authenticateToken } from "../middleware/auth.js";
+import { authorizeRole } from "../middleware/role.js";
+
+const router = express.Router();
+router.post("/", authenticateToken, IdeeController.create);
+router.get("/", authenticateToken, IdeeController.findAll);
+router.delete("/:id", authenticateToken, authorizeRole("admin"), IdeeController.delete);
+
+export default router;
+  </code></pre>
+</section>
+
+<section id="commandes">
+  <h2>4. Commandes à exécuter</h2>
+  <pre><code>
+# Créer le middleware role.js
+# Ajouter les routes idées à server.js
+import ideeRoutes from "./routes/ideeRoutes.js";
+app.use("/api/idees", ideeRoutes);
+  </code></pre>
+</section>
+
+<section id="recap">
+  <h2>5. Récapitulatif</h2>
+  <ul>
+    <li>Routes sécurisées selon le rôle</li>
+    <li>Middleware d’autorisation mis en place</li>
+    <li>CRUD utilisateurs et idées protégé</li>
+  </ul>
+</section>
+
+<section id="etape-suivante">
+  <h2>6. Étape suivante</h2>
+  <p>
+    Étape 6 : Upload d’images avec Multer pour ajouter des images aux idées.
+  </p>
+</section>
+</main>
+
+<footer>
+  <p>Projet Boîte à Idées – Étape 5</p>
+</footer>
+<script src="public/js/script.js"></script>
+</body>
+</html>

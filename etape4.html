@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Étape 4 – Routes et contrôleurs | Boîte à Idées</title>
+  <link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+<header>
+  <nav class="navbar">
+    <div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Introduction</a></li>
+      <li><a href="etape1.html">Étape 1</a></li>
+      <li><a href="etape2.html">Étape 2</a></li>
+      <li><a href="etape3.html">Étape 3</a></li>
+      <li><a href="etape4.html">Étape 4</a></li>
+      <li><a href="etape5.html">Étape 5</a></li>
+      <li><a href="etape6.html">Étape 6</a></li>
+      <li><a href="etape7.html">Étape 7</a></li>
+      <li><a href="etape8.html">Étape 8</a></li>
+      <li><a href="etape9.html">Étape 9</a></li>
+      <li><a href="etape10.html">Étape 10</a></li>
+      <li><a href="etape11.html">Étape 11</a></li>
+      <li><a href="recap.html">Récapitulatif</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<section id="introduction">
+  <h1>Étape 4 – Routes et contrôleurs</h1>
+  <h2>1. Introduction à la thématique</h2>
+  <p>
+    Nous allons créer les routes pour gérer les utilisateurs et les idées, et les relier aux contrôleurs.  
+    Les contrôleurs centralisent la logique métier et interagissent avec les modèles et middlewares définis dans les étapes précédentes.
+  </p>
+</section>
+
+<section id="outils">
+  <h2>2. Outils et dépendances</h2>
+  <ul>
+    <li>Express pour gérer les routes</li>
+    <li>Fichiers de contrôleurs pour séparer la logique métier</li>
+  </ul>
+</section>
+
+<section id="theorie">
+  <h2>3. Théorie et code</h2>
+  <pre><code>
+// routes/userRoutes.js
+import express from "express";
+import { UserController } from "../controllers/userController.js";
+import { validateUser } from "../middleware/validation.js";
+import { authenticateToken } from "../middleware/auth.js";
+
+const router = express.Router();
+
+router.post("/register", validateUser, UserController.register);
+router.post("/login", UserController.login);
+router.get("/profile", authenticateToken, UserController.profile);
+
+export default router;
+
+// controllers/userController.js
+import { UserModel } from "../models/User.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+export const UserController = {
+  register: async (req, res) => {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    UserModel.create({ ...req.body, password: hashedPassword, role: "user" }, (err, result) => {
+      if(err) return res.status(500).json(err);
+      res.status(201).json({ message: "Utilisateur créé" });
+    });
+  },
+  login: (req, res) => {
+    UserModel.findByEmail(req.body.email, async (err, users) => {
+      if(err || users.length === 0) return res.status(400).json({ error: "Utilisateur non trouvé" });
+      const match = await bcrypt.compare(req.body.password, users[0].password);
+      if(!match) return res.status(401).json({ error: "Mot de passe incorrect" });
+      const token = jwt.sign({ id: users[0].id, role: users[0].role }, process.env.JWT_SECRET);
+      res.json({ token });
+    });
+  },
+  profile: (req, res) => {
+    res.json({ user: req.user });
+  }
+};
+  </code></pre>
+</section>
+
+<section id="commandes">
+  <h2>4. Commandes à exécuter</h2>
+  <pre><code>
+# Créer les fichiers routes et controllers
+mkdir routes controllers
+# Ajouter les routes dans server.js
+import userRoutes from "./routes/userRoutes.js";
+app.use("/api/users", userRoutes);
+  </code></pre>
+</section>
+
+<section id="recap">
+  <h2>5. Récapitulatif</h2>
+  <ul>
+    <li>Routes pour CRUD utilisateurs et idées créées</li>
+    <li>Contrôleurs pour gérer la logique métier</li>
+    <li>Intégration des middlewares et validation existants</li>
+  </ul>
+</section>
+
+<section id="etape-suivante">
+  <h2>6. Étape suivante</h2>
+  <p>
+    Étape 5 : Authentification avancée et gestion des rôles. Nous allons restreindre certaines routes aux administrateurs et utilisateurs authentifiés.
+  </p>
+</section>
+</main>
+
+<footer>
+  <p>Projet Boîte à Idées – Étape 4</p>
+</footer>
+<script src="public/js/script.js"></script>
+</body>
+</html>

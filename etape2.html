@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Étape 2 – Base de données et modèles | Boîte à Idées</title>
+  <link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Introduction</a></li>
+        <li><a href="etape1.html">Étape 1</a></li>
+        <li><a href="etape2.html">Étape 2</a></li>
+        <li><a href="etape3.html">Étape 3</a></li>
+        <li><a href="etape4.html">Étape 4</a></li>
+        <li><a href="etape5.html">Étape 5</a></li>
+        <li><a href="etape6.html">Étape 6</a></li>
+        <li><a href="etape7.html">Étape 7</a></li>
+        <li><a href="etape8.html">Étape 8</a></li>
+        <li><a href="etape9.html">Étape 9</a></li>
+        <li><a href="etape10.html">Étape 10</a></li>
+        <li><a href="etape11.html">Étape 11</a></li>
+        <li><a href="recap.html">Récapitulatif</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Introduction -->
+    <section id="introduction">
+      <h1>Étape 2 – Configuration de la base de données et modèles</h1>
+      <h2>1. Introduction à la thématique</h2>
+      <p>
+        Nous allons maintenant compléter le serveur minimal de l’étape 1 en intégrant une base de données MySQL.  
+        L’objectif est de préparer les modèles <code>User</code> et <code>Idee</code> pour le futur CRUD et l’authentification.
+      </p>
+    </section>
+
+    <!-- Outils et dépendances -->
+    <section id="outils">
+      <h2>2. Outils et dépendances</h2>
+      <ul>
+        <li>MySQL ou MariaDB</li>
+        <li>Postman pour tester les requêtes</li>
+        <li>mysql2 pour la connexion Node.js / MySQL</li>
+        <li>dotenv pour sécuriser les identifiants</li>
+      </ul>
+    </section>
+
+    <!-- Théorie / explication du code -->
+    <section id="theorie">
+      <h2>3. Théorie et code</h2>
+      <p>Créons le fichier <code>config/db.js</code> et les modèles :</p>
+      <pre><code>
+// config/db.js
+import mysql from "mysql2";
+import dotenv from "dotenv";
+dotenv.config();
+
+export const db = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+// models/User.js
+export const UserModel = {
+  create: (user, callback) => {
+    const sql = "INSERT INTO users (email, pseudo, password, role) VALUES (?, ?, ?, ?)";
+    db.query(sql, [user.email, user.pseudo, user.password, user.role], callback);
+  },
+  findByEmail: (email, callback) => {
+    const sql = "SELECT * FROM users WHERE email = ?";
+    db.query(sql, [email], callback);
+  }
+};
+
+// models/Idee.js
+export const IdeeModel = {
+  create: (idee, callback) => {
+    const sql = "INSERT INTO idees (titre, description, image, date_creation, createur_id) VALUES (?, ?, ?, ?, ?)";
+    db.query(sql, [idee.titre, idee.description, idee.image, idee.date_creation, idee.createur_id], callback);
+  },
+  findAll: (callback) => {
+    const sql = "SELECT * FROM idees";
+    db.query(sql, callback);
+  }
+};
+      </code></pre>
+      <ul>
+        <li>Création d’un pool de connexions MySQL</li>
+        <li>Modèles pour gérer les utilisateurs et les idées</li>
+        <li>Chaque méthode interagit avec la base de données pour créer ou lire des données</li>
+      </ul>
+    </section>
+
+    <!-- Commandes -->
+    <section id="commandes">
+      <h2>4. Commandes à exécuter</h2>
+      <pre><code>
+# Créer la base
+mysql -u root -p
+CREATE DATABASE boite_a_idees;
+
+# Créer les tables
+USE boite_a_idees;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  pseudo VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  role ENUM('user','admin') DEFAULT 'user'
+);
+
+CREATE TABLE idees (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  titre VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  image VARCHAR(255),
+  date_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+  createur_id INT,
+  FOREIGN KEY (createur_id) REFERENCES users(id)
+);
+      </code></pre>
+    </section>
+
+    <!-- Récapitulatif -->
+    <section id="recap">
+      <h2>5. Récapitulatif</h2>
+      <ul>
+        <li>Base de données MySQL créée</li>
+        <li>Tables <code>users</code> et <code>idees</code> prêtes</li>
+        <li>Fichier <code>db.js</code> configuré</li>
+        <li>Modèles préparés pour les futures opérations CRUD</li>
+      </ul>
+    </section>
+
+    <!-- Étape suivante -->
+    <section id="etape-suivante">
+      <h2>6. Étape suivante</h2>
+      <p>
+        Étape 3 : Validation et middlewares. Nous allons sécuriser les routes, valider les données entrantes avec Joi, et préparer les middlewares pour le projet.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Projet Boîte à Idées – Étape 2</p>
+  </footer>
+  <script src="public/js/script.js"></script>
+</body>
+</html>

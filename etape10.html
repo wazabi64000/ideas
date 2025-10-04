@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Étape 11 – Finalisation client | Boîte à Idées</title>
+<link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+<header>
+<nav class="navbar">
+<div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+<button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+<ul class="nav-links" id="nav-links">
+<li><a href="index.html">Introduction</a></li>
+<li><a href="etape1.html">Étape 1</a></li>
+<li><a href="etape2.html">Étape 2</a></li>
+<li><a href="etape3.html">Étape 3</a></li>
+<li><a href="etape4.html">Étape 4</a></li>
+<li><a href="etape5.html">Étape 5</a></li>
+<li><a href="etape6.html">Étape 6</a></li>
+<li><a href="etape7.html">Étape 7</a></li>
+<li><a href="etape8.html">Étape 8</a></li>
+<li><a href="etape9.html">Étape 9</a></li>
+<li><a href="etape10.html">Étape 10</a></li>
+<li><a href="etape11.html">Étape 11</a></li>
+<li><a href="recap.html">Récapitulatif</a></li>
+</ul>
+</nav>
+</header>
+
+<main>
+<section id="introduction">
+<h1>Étape 11 – Finalisation et optimisation côté client</h1>
+<p>
+Nous finalisons l’application côté client : interface intuitive, validation, affichage en temps réel, et compatibilité mobile.
+</p>
+</section>
+
+<section id="theorie">
+<pre><code>
+// public/js/script.js
+// Gestion de la création, affichage et suppression côté client
+async function supprimerIdee(id){
+  await fetch("/api/idees/" + id, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+  });
+  chargerIdees();
+}
+
+// Optimisation : éviter rechargement complet, améliorer accessibilité
+listeIdees.addEventListener("click", (e) => {
+  if(e.target.classList.contains("deleteBtn")){
+    supprimerIdee(e.target.dataset.id);
+  }
+});
+</code></pre>
+</section>
+
+<section id="recap">
+<ul>
+<li>Fonctionnalités complètes côté client</li>
+<li>Affichage temps réel et suppression</li>
+<li>Compatibilité mobile et accessibilité</li>
+<li>Projet prêt pour production minimale (MVP)</li>
+</ul>
+</section>
+
+<section id="etape-suivante">
+<p>
+Toutes les étapes principales du projet sont complétées.
+</p>
+</section>
+</main>
+
+<footer>
+<p>Projet Boîte à Idées – Étape 11</p>
+</footer>
+<script src="public/js/script.js"></script>
+</body>
+</html>

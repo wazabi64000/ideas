@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Étape 3 – Validation et middlewares | Boîte à Idées</title>
+  <link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Introduction</a></li>
+        <li><a href="etape1.html">Étape 1</a></li>
+        <li><a href="etape2.html">Étape 2</a></li>
+        <li><a href="etape3.html">Étape 3</a></li>
+        <li><a href="etape4.html">Étape 4</a></li>
+        <li><a href="etape5.html">Étape 5</a></li>
+        <li><a href="etape6.html">Étape 6</a></li>
+        <li><a href="etape7.html">Étape 7</a></li>
+        <li><a href="etape8.html">Étape 8</a></li>
+        <li><a href="etape9.html">Étape 9</a></li>
+        <li><a href="etape10.html">Étape 10</a></li>
+        <li><a href="etape11.html">Étape 11</a></li>
+        <li><a href="recap.html">Récapitulatif</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Introduction -->
+    <section id="introduction">
+      <h1>Étape 3 – Validation et middlewares</h1>
+      <h2>1. Introduction à la thématique</h2>
+      <p>
+        Nous allons sécuriser le serveur en ajoutant des middlewares et en validant les données entrantes avec <code>Joi</code>.  
+        Cela permettra de vérifier que les informations envoyées par les utilisateurs respectent les règles attendues avant de toucher la base de données.
+      </p>
+    </section>
+
+    <!-- Outils et dépendances -->
+    <section id="outils">
+      <h2>2. Outils et dépendances</h2>
+      <ul>
+        <li>Joi pour la validation des données</li>
+        <li>Express pour intégrer les middlewares</li>
+        <li>Middleware personnalisé pour l’authentification et gestion des erreurs</li>
+      </ul>
+    </section>
+
+    <!-- Théorie / explication du code -->
+    <section id="theorie">
+      <h2>3. Théorie et code</h2>
+      <pre><code>
+// middleware/validation.js
+import Joi from "joi";
+
+export const validateUser = (req, res, next) => {
+  const schema = Joi.object({
+    email: Joi.string().email().required(),
+    pseudo: Joi.string().min(3).required(),
+    password: Joi.string().min(6).required()
+  });
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).json({ error: error.details[0].message });
+  next();
+};
+
+// middleware/auth.js
+import jwt from "jsonwebtoken";
+
+export const authenticateToken = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];
+  if (!token) return res.sendStatus(401);
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+};
+      </code></pre>
+      <p><strong>Explications :</strong></p>
+      <ul>
+        <li><code>validateUser</code> : vérifie les champs envoyés par le client avant insertion</li>
+        <li><code>authenticateToken</code> : protège les routes pour les utilisateurs authentifiés</li>
+      </ul>
+    </section>
+
+    <!-- Commandes -->
+    <section id="commandes">
+      <h2>4. Commandes à exécuter</h2>
+      <pre><code>
+npm install joi jsonwebtoken
+# redémarrer le serveur pour appliquer les middlewares
+npm run dev
+      </code></pre>
+    </section>
+
+    <!-- Récapitulatif -->
+    <section id="recap">
+      <h2>5. Récapitulatif</h2>
+      <ul>
+        <li>Validation des données utilisateurs avec Joi</li>
+        <li>Middleware d’authentification JWT mis en place</li>
+        <li>Routes sécurisées prêtes à recevoir des requêtes validées</li>
+      </ul>
+    </section>
+
+    <!-- Étape suivante -->
+    <section id="etape-suivante">
+      <h2>6. Étape suivante</h2>
+      <p>
+        Étape 4 : Création des routes et contrôleurs. Nous allons gérer les endpoints pour CRUD utilisateurs et idées.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Projet Boîte à Idées – Étape 3</p>
+  </footer>
+  <script src="public/js/script.js"></script>
+</body>
+</html>

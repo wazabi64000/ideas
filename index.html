@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boîte à Idées – Guide complet</title>
+  <link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Introduction</a></li>
+        <li><a href="etape1.html">Étape 1</a></li>
+        <li><a href="etape2.html">Étape 2</a></li>
+        <li><a href="etape3.html">Étape 3</a></li>
+        <li><a href="etape4.html">Étape 4</a></li>
+        <li><a href="etape5.html">Étape 5</a></li>
+        <li><a href="etape6.html">Étape 6</a></li>
+        <li><a href="etape7.html">Étape 7</a></li>
+        <li><a href="etape8.html">Étape 8</a></li>
+        <li><a href="etape9.html">Étape 9</a></li>
+        <li><a href="etape10.html">Étape 10</a></li>
+        <li><a href="etape11.html">Étape 11</a></li>
+        <li><a href="recap.html">Récapitulatif</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Introduction générale -->
+    <section id="introduction">
+      <h1>Bienvenue dans le projet « Boîte à Idées »</h1>
+      <p>
+        Ce guide complet vous accompagne pas à pas dans la création d'une application fullstack moderne avec <strong>Node.js (Express ESM), MySQL et Twig</strong>. 
+        Vous apprendrez à structurer un projet MVC, créer un CRUD complet, gérer l’authentification et les rôles, permettre l’upload d’images, et construire une interface client responsive et accessible.
+      </p>
+    </section>
+
+    <!-- Présentation des étapes -->
+    <section id="etapes">
+      <h2>Résumé des étapes du projet</h2>
+
+      <article>
+        <h3>Étape 1 – Initiation du projet</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Créer l’arborescence, installer les dépendances, préparer le projet pour le développement</li>
+          <li><strong>Dépendances :</strong> Express, dotenv, nodemon, mysql2, Joi, Twig, bcrypt, jsonwebtoken, multer</li>
+          <li><strong>Logique / Code :</strong> Initialisation npm, structure des dossiers, configuration du serveur</li>
+          <li><a href="etape1.html">Voir l’étape 1 complète</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Étape 2 – Configuration de la base de données et modèles</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Créer la base MySQL, tables <code>users</code> et <code>idees</code>, et les modèles côté serveur</li>
+          <li><strong>Dépendances :</strong> mysql2, dotenv</li>
+          <li><strong>Logique / Code :</strong> Pool MySQL, export des modèles pour interaction avec le contrôleur</li>
+          <li><a href="etape2.html">Voir l’étape 2 complète</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Étape 3 – Validation et middlewares</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Sécuriser l’API en validant les données avec Joi et créer les middlewares</li>
+          <li><strong>Dépendances :</strong> Joi, Express</li>
+          <li><strong>Logique / Code :</strong> Schémas de validation, middleware global pour intercepter et gérer les erreurs</li>
+          <li><a href="etape3.html">Voir l’étape 3 complète</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Étape 4 – Routes et contrôleurs</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Créer les routes Express et relier les contrôleurs aux modèles</li>
+          <li><strong>Dépendances :</strong> Express</li>
+          <li><strong>Logique / Code :</strong> Définir routes GET, POST, PUT, DELETE ; utiliser les middlewares de validation</li>
+          <li><a href="etape4.html">Voir l’étape 4 complète</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Étape 5 – Authentification et gestion des rôles</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Sécuriser l’accès avec JWT et gérer les rôles admin/user</li>
+          <li><strong>Dépendances :</strong> bcrypt, jsonwebtoken</li>
+          <li><strong>Logique / Code :</strong> Hashage des mots de passe, génération et vérification du token, contrôle des rôles dans les middlewares</li>
+          <li><a href="etape5.html">Voir l’étape 5 complète</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Étape 6 – Upload d’images avec Multer</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Permettre aux utilisateurs d’ajouter des images aux idées</li>
+          <li><strong>Dépendances :</strong> Multer</li>
+          <li><strong>Logique / Code :</strong> Configuration Multer, stockage local, limite 2 Mo, filtrage pour types image</li>
+          <li><a href="etape6.html">Voir l’étape 6 complète</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Étape 7 – Intégration Twig et vues dynamiques</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Créer les pages HTML dynamiques côté serveur avec Twig</li>
+          <li><strong>Dépendances :</strong> Twig</li>
+          <li><strong>Logique / Code :</strong> Layout global, pages affichage idées, formulaire création idée</li>
+          <li><a href="etape7.html">Voir l’étape 7 complète</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Étape 8 – Affichage des idées côté client</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Créer l’interface utilisateur pour visualiser les idées</li>
+          <li><strong>Dépendances :</strong> CSS, Twig</li>
+          <li><strong>Logique / Code :</strong> Cartes d’idées responsives, affichage des informations du créateur</li>
+          <li><a href="etape8.html">Voir l’étape 8 complète</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Étape 9 – Formulaire création d’idée côté client</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Créer le formulaire de saisie avec upload d’image</li>
+          <li><strong>Dépendances :</strong> Multer, Twig</li>
+          <li><strong>Logique / Code :</strong> Formulaire HTML, validation côté client, envoi des fichiers via POST</li>
+          <li><a href="etape9.html">Voir l’étape 9 complète</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Étape 10 – Navigation et interactions JS</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Ajouter interactivité : menu burger, filtres, modals</li>
+          <li><strong>Dépendances :</strong> JS natif ou léger framework</li>
+          <li><strong>Logique / Code :</strong> Gestion événements DOM, toggles CSS/JS, navigation responsive</li>
+          <li><a href="etape10.html">Voir l’étape 10 complète</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Étape 11 – Style et accessibilité</h3>
+        <ul>
+          <li><strong>Objectif :</strong> Finaliser le design, rendre le projet accessible et responsive</li>
+          <li><strong>Dépendances :</strong> CSS commun, media queries</li>
+          <li><strong>Logique / Code :</strong> Mobile-first, contraste, focus, boutons et formulaires accessibles</li>
+          <li><a href="etape11.html">Voir l’étape 11 complète</a></li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>Projet Boîte à Idées – Guide complet</p>
+  </footer>
+
+  <script src="public/js/script.js"></script>
+</body>
+</html>

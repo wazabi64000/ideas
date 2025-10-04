@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Étape 6 – Upload d’images | Boîte à Idées</title>
+  <link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+<header>
+  <nav class="navbar">
+    <div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Introduction</a></li>
+      <li><a href="etape1.html">Étape 1</a></li>
+      <li><a href="etape2.html">Étape 2</a></li>
+      <li><a href="etape3.html">Étape 3</a></li>
+      <li><a href="etape4.html">Étape 4</a></li>
+      <li><a href="etape5.html">Étape 5</a></li>
+      <li><a href="etape6.html">Étape 6</a></li>
+      <li><a href="etape7.html">Étape 7</a></li>
+      <li><a href="etape8.html">Étape 8</a></li>
+      <li><a href="etape9.html">Étape 9</a></li>
+      <li><a href="etape10.html">Étape 10</a></li>
+      <li><a href="etape11.html">Étape 11</a></li>
+      <li><a href="recap.html">Récapitulatif</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<section id="introduction">
+  <h1>Étape 6 – Upload d’images avec Multer</h1>
+  <p>
+    Nous ajoutons la possibilité de joindre une image à chaque idée via Multer, avec une limite de 2 Mo.
+  </p>
+</section>
+
+<section id="outils">
+  <ul>
+    <li>multer pour gérer les fichiers uploadés</li>
+    <li>Configuration de stockage local</li>
+  </ul>
+</section>
+
+<section id="theorie">
+  <pre><code>
+// middleware/upload.js
+import multer from "multer";
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/"),
+  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname)
+});
+
+export const upload = multer({
+  storage,
+  limits: { fileSize: 2 * 1024 * 1024 }, // 2 Mo
+  fileFilter: (req, file, cb) => {
+    if(file.mimetype.startsWith("image/")) cb(null, true);
+    else cb(new Error("Seules les images sont autorisées"));
+  }
+});
+  </code></pre>
+</section>
+
+<section id="commandes">
+  <pre><code>
+# Créer dossier uploads
+mkdir uploads
+# Ajouter Multer aux routes idées
+router.post("/", authenticateToken, upload.single("image"), IdeeController.create);
+  </code></pre>
+</section>
+
+<section id="recap">
+  <ul>
+    <li>Upload d’images sécurisé avec limite 2 Mo</li>
+    <li>Filtrage par type MIME pour ne garder que les images</li>
+    <li>Route idées adaptée pour gérer l’image</li>
+  </ul>
+</section>
+
+<section id="etape-suivante">
+  <p>
+    Étape 7 : Intégration Twig pour afficher le contenu côté serveur.
+  </p>
+</section>
+</main>
+
+<footer>
+  <p>Projet Boîte à Idées – Étape 6</p>
+</footer>
+<script src="public/js/script.js"></script>
+</body>
+</html>

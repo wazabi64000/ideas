@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Étape 7 – Intégration Twig | Boîte à Idées</title>
+<link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+<header>
+<nav class="navbar">
+<div class="nav-logo"><a href="index.html">Boîte à Idées</a></div>
+<button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+<ul class="nav-links" id="nav-links">
+<li><a href="index.html">Introduction</a></li>
+<li><a href="etape1.html">Étape 1</a></li>
+<li><a href="etape2.html">Étape 2</a></li>
+<li><a href="etape3.html">Étape 3</a></li>
+<li><a href="etape4.html">Étape 4</a></li>
+<li><a href="etape5.html">Étape 5</a></li>
+<li><a href="etape6.html">Étape 6</a></li>
+<li><a href="etape7.html">Étape 7</a></li>
+<li><a href="etape8.html">Étape 8</a></li>
+<li><a href="etape9.html">Étape 9</a></li>
+<li><a href="etape10.html">Étape 10</a></li>
+<li><a href="etape11.html">Étape 11</a></li>
+<li><a href="recap.html">Récapitulatif</a></li>
+</ul>
+</nav>
+</header>
+
+<main>
+<section id="introduction">
+<h1>Étape 7 – Intégration Twig côté serveur</h1>
+<p>
+Nous allons utiliser Twig pour générer dynamiquement les pages HTML côté serveur. Chaque idée pourra être affichée avec ses informations et image.
+</p>
+</section>
+
+<section id="outils">
+<ul>
+<li>twig pour le rendu des templates</li>
+<li>Express adapter pour Twig</li>
+</ul>
+</section>
+
+<section id="theorie">
+<pre><code>
+// server.js
+import express from "express";
+import twig from "twig";
+import path from "path";
+
+app.set("view engine", "twig");
+app.set("views", path.join(__dirname, "views"));
+
+// routes pour afficher toutes les idées
+router.get("/idees", authenticateToken, async (req, res) => {
+  IdeeModel.findAll((err, idees) => {
+    if(err) return res.status(500).send(err);
+    res.render("idees.twig", { idees });
+  });
+});
+</code></pre>
+</section>
+
+<section id="commandes">
+<pre><code>
+# Créer dossier views
+mkdir views
+# Créer idees.twig
+touch views/idees.twig
+# Exemple minimal de template
+{% for idee in idees %}
+  <div class="idee">
+    <h3>{{ idee.titre }}</h3>
+    <p>{{ idee.description }}</p>
+    {% if idee.image %}
+      <img src="/uploads/{{ idee.image }}" alt="Image de l'idée">
+    {% endif %}
+  </div>
+{% endfor %}
+</code></pre>
+</section>
+
+<section id="recap">
+<ul>
+<li>Twig configuré avec Express</li>
+<li>Templates dynamiques pour afficher les idées</li>
+<li>Préparation côté serveur pour le rendu des pages</li>
+</ul>
+</section>
+
+<section id="etape-suivante">
+<p>
+Étape 8 : Création du formulaire client et affichage interactif des idées.
+</p>
+</section>
+</main>
+
+<footer>
+<p>Projet Boîte à Idées – Étape 7</p>
+</footer>
+<script src="public/js/script.js"></script>
+</body>
+</html>
