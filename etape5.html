@@ -121,7 +121,55 @@ app.post("/login", async (req, res) => {
   <button type="submit">Se connecter</button>
 </form>
 </code></pre>
-</section>
+</section> <pre><code>
+{# fichier : views/etape6.twig #}
+
+&lt;section id="formulaire"&gt;
+  &lt;h2&gt;Soumettre une idée&lt;/h2&gt;
+  &lt;!-- Formulaire d'envoi avec support d'image --&gt;
+  &lt;form action="/idees" method="POST" enctype="multipart/form-data" class="form-idee"&gt;
+
+    &lt;div class="form-group"&gt;
+      &lt;label for="titre"&gt;Titre :&lt;/label&gt;
+      &lt;input type="text" id="titre" name="titre" required&gt;
+    &lt;/div&gt;
+
+    &lt;div class="form-group"&gt;
+      &lt;label for="description"&gt;Description :&lt;/label&gt;
+      &lt;textarea id="description" name="description" rows="4" required&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+
+    &lt;div class="form-group"&gt;
+      &lt;label for="image"&gt;Image :&lt;/label&gt;
+      &lt;input type="file" id="image" name="image" accept="image/*"&gt;
+    &lt;/div&gt;
+
+    &lt;button type="submit"&gt;Envoyer&lt;/button&gt;
+
+  &lt;/form&gt;
+&lt;/section&gt;
+
+&lt;!-- Affichage des idées existantes --&gt;
+&lt;section id="liste-idees"&gt;
+  &lt;h2&gt;Idées enregistrées&lt;/h2&gt;
+  {% raw %}{% if idees and idees|length > 0 %}{% endraw %}
+    &lt;ul class="liste-idees"&gt;
+      {% raw %}{% for idee in idees %}{% endraw %}
+        &lt;li class="idee"&gt;
+          &lt;h3&gt;{% raw %}{{ idee.titre }}{% endraw %}&lt;/h3&gt;
+          &lt;p&gt;{% raw %}{{ idee.description }}{% endraw %}&lt;/p&gt;
+          {% raw %}{% if idee.image %}{% endraw %}
+            &lt;img src="/public/uploads/{% raw %}{{ idee.image }}{% endraw %}" alt="Image de {% raw %}{{ idee.titre }}{% endraw %}" width="200"&gt;
+          {% raw %}{% endif %}{% endraw %}
+        &lt;/li&gt;
+      {% raw %}{% endfor %}{% endraw %}
+    &lt;/ul&gt;
+  {% raw %}{% else %}{% endraw %}
+    &lt;p&gt;Aucune idée enregistrée.&lt;/p&gt;
+  {% raw %}{% endif %}{% endraw %}
+&lt;/section&gt;
+    </code></pre>
+
 
 <section id="recap">
 <h2>Récapitulatif</h2>
